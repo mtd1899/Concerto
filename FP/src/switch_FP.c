@@ -56,33 +56,20 @@ void Do_Switches(void)
 			port_pin_set_output_level(FP_SWO7, 0);
 			port_pin_set_output_level(FP_SWO8, 1);
 			break;
-				
-		//default:	
-		
 	}
-
-/*
-
-	if (port_pin_get_input_level(FP_SWI0) == 0)
-	{
-		test++;
-	}*/
 }
-
-
-
 
 static inline void inc_switch(uint8_t FPswitch)
 {
 	switch (swDebounce[FPswitch])
 	{	case 10:
-		put_FP_swQ(FPswitch+1);			// turn on
-		swDebounce[FPswitch]++;
-		break;
-		case 11:
-		break;
+			put_FP_swQ(FPswitch+1);			// turn on
+			swDebounce[FPswitch]++;
+			break;
+		case 11:							// counts up to 11
+			break;
 		default:
-		swDebounce[FPswitch]++;
+			swDebounce[FPswitch]++;
 	}
 }
 
@@ -90,13 +77,13 @@ static inline void dec_switch(uint8_t FPswitch)
 {
 	switch (swDebounce[FPswitch])
 	{	case 1:
-		put_FP_swQ(FP_SW_OPEN_FLAG + FPswitch+1);		// turn off
-		swDebounce[FPswitch]--;
-		break;
+			put_FP_swQ(FP_SW_OPEN_FLAG + FPswitch+1);		// turn off
+			swDebounce[FPswitch]--;
+			break;
 		case 0:
-		break;
+			break;							 // stops dec at 0
 		default:
-		swDebounce[FPswitch]--;
+			swDebounce[FPswitch]--;
 	}
 }
 

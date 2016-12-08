@@ -36,9 +36,13 @@ void LED_I2C_Start(void);
 void LED_I2C_Init(void);
 bool I2C_ReadBit(void);
 
-
-#define LED_FP_SDA 	PIN_PB03	
+#define LED_FP_SDA 	PIN_PB03				// wired per proto board
 #define LED_FP_SCL 	PIN_PB02
+/*
+
+#define LED_FP_SDA 	PIN_PB02				// wired per schematic
+#define LED_FP_SCL 	PIN_PB03
+*/
 
 #define I2C_CLOCK_HI() 	port_pin_set_output_level(LED_FP_SCL,1);
 #define I2C_CLOCK_LO()	port_pin_set_output_level(LED_FP_SCL,0);

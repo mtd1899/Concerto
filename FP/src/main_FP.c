@@ -127,6 +127,30 @@ int main(void)
 	
 
 	LEDs_Init();						// init all 3 ICs
+	
+	// test if LED_Test should be implemented
+	bool sw40=false, sw32=false;
+	for (uint8_t i=0; i<100; i++)  Do_Switches();			// read and debounce
+	for (uint8_t i=0; i<FP_QUE_SIZE; i++)
+	{	if (FPswQ.val[i] == 40)
+			sw40=true;
+		if (FPswQ.val[i] == 32) 
+			sw32=true;
+	}
+	uint8_t cnt=0;
+	while (sw32 && sw40)								// loop forever in LED Test
+	{	Do_LEDs();					
+		if(ledTimer==192)
+		{
+			LED_Vals[cnt]=0;
+			cnt++;
+			if(cnt>62)
+				cnt=0;
+			LED_Vals[cnt]=99;
+			ledTimer++;
+		}
+	}	
+		
 					
 	while (1)
 	{
